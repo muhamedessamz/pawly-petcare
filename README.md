@@ -11,7 +11,7 @@
 
 **A modern, scalable microservices-inspired platform bridging the gap between shelters, veterinarians, and pet lovers.**
 
-[Live Demo](https://pawly-petcare.vercel.app/) • [Documentation](PROJECT_STRUCTURE.md) • [Report Bug](https://github.com/muhamedessamz/pawly-petcare/issues)
+[Live Demo](https://pawly-petcare.vercel.app/) • [Frontend Repo](https://github.com/muhamedessamz/Pawly-Petcare-Frontend) • [Backend Repo](https://github.com/muhamedessamz/Pawly-Petcare-Backend) • [Dashboard Repo](https://github.com/muhamedessamz/Pawly-Petcare-Dashboard)
 
 </div>
 
@@ -37,20 +37,59 @@
 
 ## 🧠 Technical Architecture
 
-The system is architected for **Scalability**, **Maintainability**, and **Security**.
+The platform is built on a **modern, decoupled microservices-inspired architecture**, ensuring scalability, maintainability, and seamless user experience.
 
-### 🔹 Backend: Use of Clean Architecture
-The core API is built on **Clean Architecture (Onion Architecture)** principles to ensure independence of frameworks and UI.
+### 🏗️ System Overview
 
--   **Domain Layer**: Pure C# entities and business rules (Zero dependencies).
--   **Application Layer**: Use Cases, DTOs, and Interfaces (CQRS pattern ready).
--   **Infrastructure Layer**: EF Core implementation, Database migrations, and external services.
--   **Presentation Layer (API)**: Minimal controllers handling HTTP requests.
+```mermaid
+graph TD
+    User[User / Client] -->|HTTPS| Frontend[Frontend (React + Vite)]
+    Admin[Admin] -->|HTTPS| Dashboard[Admin Dashboard (React)]
+    
+    Frontend -->|REST API| Gateway[API Gateway / Load Balancer]
+    Dashboard -->|REST API| Gateway
+    
+    Gateway -->|HTTPS| Backend[Backend API (.NET 8)]
+    
+    Backend -->|Query/Command| DB[(SQL Server)]
+    Backend -->|Auth| Identity[Identity Service]
+    Backend -->|Storage| Blob[Cloud Storage (Images)]
+```
 
-### 🔹 Frontend: Modern React Ecosystem
-Two separate, optimized React applications:
--   **Main Website**: focused on SEO, accessibility, and high performance (Vite + Tailwind).
--   **Admin Dashboard**: Data-heavy interface using **Recharts** for analytics and complex tables for management.
+### � Backend Architecture (Clean Architecture)
+
+The backend is engineered using **Clean Architecture (Onion Architecture)** principles to ensure independence of frameworks, UI, and external agencies.
+
+#### **Layers Breakdown:**
+1.  **Domain Layer (Core)**: 
+    *   Contains enterprise logic and entities (`Pet`, `User`, `Appointment`).
+    *   No dependencies on other layers.
+    *   Pure C# implementation.
+2.  **Application Layer**: 
+    *   Orchestrates application logic using **CQRS** principles.
+    *   Defines Interfaces (`IPetRepository`), DTOs, and Validators.
+    *   Uses **AutoMapper** for object mapping.
+3.  **Infrastructure Layer**: 
+    *   Implements interfaces defined in Application layer.
+    *   Handles Database access (**EF Core 8**), File Storage, and Email Services.
+    *   Manages **Migrations** and Database Seeding.
+4.  **Presentation Layer (API)**: 
+    *   RESTful API Endpoints.
+    *   Global Exception Handling & Middleware.
+    *   **Swagger/OpenAPI** documentation.
+
+### 🎨 Frontend Architecture
+
+The frontend is built as a **Single Page Application (SPA)** using **React 19** and **Vite**, focusing on performance and component reusability.
+
+#### **Key Structural/Architectural Decisions:**
+-   **Component-Driven Design**: Atomic design principles with reusable UI atoms (buttons, inputs) in `src/components/ui`.
+-   **Feature-Based Folders**: Logic grouped by feature (e.g., `src/components/features/PetCard`) rather than technical type.
+-   **Centralized Service Layer**: API calls abstracted in `src/services/api.js` using **Axios** interceptors for token management.
+-   **State Management**: 
+    *   **Context API**: For global state like Authentication (`AuthContext`) and Theme.
+    *   **Local State**: For component-specific logic.
+-   **Optimized Routing**: Protected routes for User/Vet areas using **React Router 6** loaders and guards.
 
 ---
 
