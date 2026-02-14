@@ -11,11 +11,17 @@
 
 **A modern, scalable microservices-inspired platform bridging the gap between shelters, veterinarians, and pet lovers.**
 
-[Live Demo](#) • [Documentation](PROJECT_STRUCTURE.md) • [Report Bug](https://github.com/muhamedessamz/pawly-petcare/issues)
+[Live Demo](https://pawly-petcare.vercel.app/) • [Documentation](PROJECT_STRUCTURE.md) • [Report Bug](https://github.com/muhamedessamz/pawly-petcare/issues)
 
 </div>
 
 ---
+
+## 📋 Table of Contents
+
+- [Project Overview](#-project-overview)
+- [Architecture](#-architecture)
+- [Repositories](#-repositories)
 
 ## 🚀 Executive Summary
 
