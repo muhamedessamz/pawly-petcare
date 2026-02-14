@@ -43,17 +43,17 @@ The platform is built on a **modern, decoupled microservices-inspired architectu
 
 ```mermaid
 graph TD
-    User[User / Client] -->|HTTPS| Frontend[Frontend (React + Vite)]
-    Admin[Admin] -->|HTTPS| Dashboard[Admin Dashboard (React)]
+    User["User / Client"] -->|HTTPS| Frontend["Frontend (React + Vite)"]
+    Admin["Admin"] -->|HTTPS| Dashboard["Admin Dashboard (React)"]
     
-    Frontend -->|REST API| Gateway[API Gateway / Load Balancer]
+    Frontend -->|REST API| Gateway["API Gateway / Load Balancer"]
     Dashboard -->|REST API| Gateway
     
-    Gateway -->|HTTPS| Backend[Backend API (.NET 8)]
+    Gateway -->|HTTPS| Backend["Backend API (.NET 8)"]
     
-    Backend -->|Query/Command| DB[(SQL Server)]
-    Backend -->|Auth| Identity[Identity Service]
-    Backend -->|Storage| Blob[Cloud Storage (Images)]
+    Backend -->|Query/Command| DB[("SQL Server")]
+    Backend -->|Auth| Identity["Identity Service"]
+    Backend -->|Storage| Blob["Cloud Storage (Images)"]
 ```
 
 ### � Backend Architecture (Clean Architecture)
